@@ -98,13 +98,14 @@
   @media (max-width:520px){ .fab button{padding:7px 11px;font-size:.88rem}  body{font-size:16px} header h1{font-size:1.6rem} .head{flex-direction:column;gap:0} .src{text-align:left} }
   @media (prefers-reduced-motion:reduce){ .meter span{transition:none} }
   @media print{ .bar,.actions,.fb{display:none} body{background:none} .task{break-inside:avoid} }
+.mclabel{margin:12px 0 4px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>Lineare Funktionen y = m · x</h1>
-    <p>Mathematik Klasse 8, Lineare Funktionen. Set 1 mit 11 Aufgaben aus dem Arbeitsheft S. 71 und 72 zum Üben mit Selbstkontrolle.</p>
+    <p>Mathematik Klasse 8, Lineare Funktionen. Set 1 mit 22 Aufgaben aus dem Lehrbuch S. 168 bis 170 und S. 180 sowie dem Arbeitsheft S. 71 und 72 zum Üben mit Selbstkontrolle.</p>
     <p>So gehst du vor. Löse jede Aufgabe zuerst im Heft und zeichne die Graphen dort ein. Trage dann dein Ergebnis ein und tippe auf „Prüfen“. Komma oder Punkt ist egal, und du darfst auch f(x) = oder y = davor schreiben. Unter dem aktiven Feld erscheinen Zusatztasten für Minus und Komma. Den Wissensbaustein und den Taschenrechner findest du jederzeit unten rechts.</p>
     <details class="tools" open><summary>🧰 Wissensbaustein</summary><div class="inner">
 <div class="fgrid">
@@ -138,7 +139,7 @@
     <button class="btn" id="evalBtn" type="button">Auswerten</button>
   </section>
 
-  <footer>Aufgaben aus dem Arbeitsheft S. 71 und 72, für den Unterricht aufbereitet. Die Seite speichert keine Eingaben und sendet keine Daten.</footer>
+  <footer>Aufgaben aus dem Lehrbuch S. 168, 169, 170 und 180 sowie dem Arbeitsheft S. 71 und 72, für den Unterricht aufbereitet. Die Seite speichert keine Eingaben und sendet keine Daten.</footer>
 </div>
 
 <div class="fab">
@@ -317,6 +318,99 @@ const T = [
   "sol": "<p class=\"calc\">f(x) = 1,4x hat m = 1,4 > 0, also <b>steigt</b> die Gerade.<br>g(x) = −0,8x hat m = −0,8 &lt; 0, also <b>fällt</b> die Gerade.<br>f(0) = 0 und g(0) = 0, also gehen <b>beide durch den Ursprung (0|0)</b>.<br>Außerdem ist f steiler als g, weil 1,4 weiter von 0 entfernt ist als 0,8.</p>"
  },
  {
+  "src": "LB S. 168, Nr. 2",
+  "q": "Die Funktion f hat die Funktionsgleichung y = 2,5x. Du sollst den Graphen zeichnen.<br>Wie viele Wertepaare brauchst du mindestens? Berechne dann einen geeigneten Punkt.",
+  "parts": [
+   {
+    "type": "mc",
+    "options": [
+     "Zwei Punkte, also den Ursprung (0|0) und einen weiteren Punkt.",
+     "Mindestens sechs Punkte.",
+     "Ein Punkt reicht, nämlich (0|0)."
+    ],
+    "correct": 0
+   },
+   {
+    "type": "num",
+    "label": "f(2) = 2,5 · 2, also P(2 | ",
+    "accept": [
+     5
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Jede Gerade y = m · x geht durch (0|0). Für eine Gerade brauchst du genau zwei Punkte.",
+  "sol": "<p class=\"calc\">Durch zwei Punkte ist eine Gerade festgelegt. Einer davon ist immer der Ursprung (0|0).<br>f(2) = 2,5 · 2 = <b>5</b>, also P(2 | 5)</p>"
+ },
+ {
+  "src": "LB S. 168, Nr. 3",
+  "q": "Zeichne f: y = 0,5x, g: y = −0,5x, h: y = 1,5x und k: y = −1,5x im Heft.<br>b) Wie verläuft der Graph, wenn der Faktor m größer (kleiner) als null ist?",
+  "parts": [
+   {
+    "type": "mc",
+    "options": [
+     "m > 0: die Gerade steigt und verläuft durch den I. und III. Quadranten.",
+     "m > 0: die Gerade fällt und verläuft durch den II. und IV. Quadranten."
+    ],
+    "correct": 0
+   },
+   {
+    "type": "mc",
+    "options": [
+     "m < 0: die Gerade steigt und verläuft durch den I. und III. Quadranten.",
+     "m < 0: die Gerade fällt und verläuft durch den II. und IV. Quadranten."
+    ],
+    "correct": 1
+   }
+  ],
+  "tip": "Der I. Quadrant ist oben rechts, dann geht es gegen den Uhrzeigersinn weiter. Wo liegt der Punkt P(1 | 0,5), wo P(1 | −0,5)?",
+  "sol": "<p class=\"calc\">f und h haben m > 0, sie <b>steigen</b> und liegen im <b>I. und III. Quadranten</b>.<br>g und k haben m &lt; 0, sie <b>fallen</b> und liegen im <b>II. und IV. Quadranten</b>.<br>h und k sind steiler als f und g, weil 1,5 weiter von 0 entfernt ist als 0,5.</p>"
+ },
+ {
+  "src": "LB S. 168, Nr. 4",
+  "q": "Zeichne die Graphen in dasselbe Koordinatensystem.<br>In welchen beiden Quadranten ist der Graph jeweils zu sehen?",
+  "parts": [
+   {
+    "type": "mc",
+    "label": "a) f: y = 4x",
+    "options": [
+     "I. und III. Quadrant",
+     "II. und IV. Quadrant"
+    ],
+    "correct": 0
+   },
+   {
+    "type": "mc",
+    "label": "b) g: y = −2x",
+    "options": [
+     "I. und III. Quadrant",
+     "II. und IV. Quadrant"
+    ],
+    "correct": 1
+   },
+   {
+    "type": "mc",
+    "label": "c) h: y = 1,8x",
+    "options": [
+     "I. und III. Quadrant",
+     "II. und IV. Quadrant"
+    ],
+    "correct": 0
+   },
+   {
+    "type": "mc",
+    "label": "d) k: y = −x",
+    "options": [
+     "I. und III. Quadrant",
+     "II. und IV. Quadrant"
+    ],
+    "correct": 1
+   }
+  ],
+  "tip": "Nur das Vorzeichen von m entscheidet. Bei k: y = −x ist m = −1.",
+  "sol": "<p class=\"calc\">a) m = 4 > 0, <b>I. und III. Quadrant</b><br>b) m = −2 &lt; 0, <b>II. und IV. Quadrant</b><br>c) m = 1,8 > 0, <b>I. und III. Quadrant</b><br>d) m = −1 &lt; 0, <b>II. und IV. Quadrant</b></p>"
+ },
+ {
   "src": "AH S. 71, Nr. 2",
   "q": "Der Graph von y = m · x ist eine Gerade durch den Ursprung. Du brauchst also nur einen weiteren Punkt. Berechne den fehlenden y-Wert und zeichne die Gerade im Heft.",
   "parts": [
@@ -436,6 +530,99 @@ const T = [
   "sol": "<p class=\"calc\">f(−2) = −10 und f(0) = 0, Unterschied 10<br>f(0) = 0 und f(2) = 10, Unterschied 10<br>f(1) = 5 und f(3) = 15, Unterschied 10<br>Also <b>x + 2 bedeutet y + 10</b>, denn 2 · 5 = 10.</p>"
  },
  {
+  "src": "LB S. 169, Nr. 1",
+  "q": "Die Funktion f hat die Gleichung y = 5x. Vervollständige die Wertetabelle im Heft für x = −4 bis 5 und trage hier drei Werte ein.<br>b) Wie verändern sich die Funktionswerte, wenn x um 1 (2, 3, 4) größer wird?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "f(−4) =",
+    "accept": [
+     -20
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(4) =",
+    "accept": [
+     20
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(5) =",
+    "accept": [
+     25
+    ]
+   },
+   {
+    "type": "num",
+    "label": "x um 1 größer, y wird größer um",
+    "accept": [
+     5
+    ]
+   },
+   {
+    "type": "num",
+    "label": "x um 2 größer, y wird größer um",
+    "accept": [
+     10
+    ]
+   },
+   {
+    "type": "num",
+    "label": "x um 3 größer, y wird größer um",
+    "accept": [
+     15
+    ]
+   },
+   {
+    "type": "num",
+    "label": "x um 4 größer, y wird größer um",
+    "accept": [
+     20
+    ]
+   }
+  ],
+  "tip": "Ein Schritt nach rechts bringt immer m = 5 dazu. Bei mehreren Schritten multiplizierst du.",
+  "sol": "<p class=\"calc\">Tabelle: −20, −15, −10, −5, 0, 5, 10, 15, 20, 25<br>x + 1 → y + <b>5</b><br>x + 2 → y + <b>10</b><br>x + 3 → y + <b>15</b><br>x + 4 → y + <b>20</b></p>"
+ },
+ {
+  "src": "LB S. 180, Nr. 1",
+  "q": "Lege im Heft eine Wertetabelle mit mindestens sechs Werten an und zeichne den Graphen. Trage hier je einen Wert ein.",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a) y = 2,6x,  f(2) =",
+    "accept": [
+     5.2
+    ]
+   },
+   {
+    "type": "num",
+    "label": "b) y = −4,1x,  f(−2) =",
+    "accept": [
+     8.2
+    ]
+   },
+   {
+    "type": "num",
+    "label": "c) y = 2/5 x,  f(5) =",
+    "accept": [
+     2
+    ]
+   },
+   {
+    "type": "num",
+    "label": "d) y = −1/4 x,  f(−4) =",
+    "accept": [
+     1
+    ]
+   }
+  ],
+  "tip": "Setze ein. Bei c) rechnest du 2/5 von 5, also 5 : 5 · 2.",
+  "sol": "<p class=\"calc\">a) 2,6 · 2 = <b>5,2</b><br>b) −4,1 · (−2) = <b>8,2</b><br>c) 2/5 · 5 = <b>2</b><br>d) −1/4 · (−4) = <b>1</b><br>Tipp für die Tabelle bei c) und d): x-Werte wählen, die durch den Nenner teilbar sind.</p>"
+ },
+ {
   "src": "AH S. 72, Nr. 4b",
   "q": "Die Funktion f hat die Gleichung f(x) = 1,2x. Wird der x-Wert um 1 erhöht, erhöht sich der y-Wert um 1,2.<br>Zeichne im Heft Steigungsdreiecke ein und gib die Seitenlänge in y-Richtung an.",
   "parts": [
@@ -487,6 +674,63 @@ const T = [
   "alt": "Auch richtig: −1,4 und −2,1."
  },
  {
+  "src": "LB S. 169, Nr. 3",
+  "q": "Die Funktion g hat die Gleichung y = 0,6x.<br>a) Berechne die Endpunkte für das Zeichnen von x = −5 bis 10.<br>b) Zeichne Steigungsdreiecke mit 1 (2, 3, 4) Längeneinheiten in x-Richtung. Wie lang ist die Seite in y-Richtung?<br>c) Die Seite in y-Richtung ist 3 Längeneinheiten lang. Wie lang ist die Seite in x-Richtung?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a) g(−5) =",
+    "accept": [
+     -3
+    ]
+   },
+   {
+    "type": "num",
+    "label": "a) g(10) =",
+    "accept": [
+     6
+    ]
+   },
+   {
+    "type": "num",
+    "label": "b) 1 nach rechts, nach oben",
+    "accept": [
+     0.6
+    ]
+   },
+   {
+    "type": "num",
+    "label": "b) 2 nach rechts, nach oben",
+    "accept": [
+     1.2
+    ]
+   },
+   {
+    "type": "num",
+    "label": "b) 3 nach rechts, nach oben",
+    "accept": [
+     1.8
+    ]
+   },
+   {
+    "type": "num",
+    "label": "b) 4 nach rechts, nach oben",
+    "accept": [
+     2.4
+    ]
+   },
+   {
+    "type": "num",
+    "label": "c) x-Richtung",
+    "accept": [
+     5
+    ]
+   }
+  ],
+  "tip": "Bei c) rechnest du rückwärts. Wie oft passt 0,6 in 3?",
+  "sol": "<p class=\"calc\">a) g(−5) = 0,6 · (−5) = <b>−3</b>, g(10) = 0,6 · 10 = <b>6</b><br>b) 1 · 0,6 = <b>0,6</b>, 2 · 0,6 = <b>1,2</b>, 3 · 0,6 = <b>1,8</b>, 4 · 0,6 = <b>2,4</b><br>c) 3 : 0,6 = <b>5</b> Längeneinheiten</p>"
+ },
+ {
   "src": "AH S. 72, Nr. 6",
   "q": "Zeichne die Graphen im Heft mit einem Steigungsdreieck vom Ursprung (0|0) aus.<br>Welchen y-Wert erreichst du, wenn du 1 nach rechts gehst?",
   "parts": [
@@ -525,6 +769,206 @@ const T = [
   ],
   "tip": "Bei 1 nach rechts gehst du genau m nach oben, bei negativem m nach unten.",
   "sol": "<p class=\"calc\">g(x) = −0,9x &nbsp;→&nbsp; 1 nach rechts, 0,9 nach unten, also <b>P(1 | −0,9)</b><br>h(x) = 1,4x &nbsp;→&nbsp; 1 nach rechts, 1,4 nach oben, also <b>P(1 | 1,4)</b><br>k(x) = 2,3x &nbsp;→&nbsp; 1 nach rechts, 2,3 nach oben, also <b>P(1 | 2,3)</b><br>l(x) = −2,1x &nbsp;→&nbsp; 1 nach rechts, 2,1 nach unten, also <b>P(1 | −2,1)</b></p>"
+ },
+ {
+  "src": "LB S. 169, Nr. 4",
+  "q": "Zeichne die Graphen mithilfe eines Steigungsdreiecks. Gehe vom Ursprung 1 nach rechts. Welchen Punkt erreichst du?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a) f(x) = 3,5x,  P(1 | ",
+    "accept": [
+     3.5
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "a) g(x) = 1,8x,  P(1 | ",
+    "accept": [
+     1.8
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b) f(x) = 1x,  P(1 | ",
+    "accept": [
+     1
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b) g(x) = 0,7x,  P(1 | ",
+    "accept": [
+     0.7
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "1 nach rechts, dann m nach oben.",
+  "sol": "<p class=\"calc\">a) <b>P(1 | 3,5)</b> und <b>P(1 | 1,8)</b><br>b) <b>P(1 | 1)</b> und <b>P(1 | 0,7)</b></p>"
+ },
+ {
+  "src": "LB S. 170, Nr. 6 a, b",
+  "q": "Zeichne die Graphen mit einem Steigungsdreieck nach unserer Regel. Vom Ursprung aus geht es mit dem Betrag von m nach oben und wegen des Minuszeichens 1 nach links.<br>Welchen Punkt erreichst du?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a) f(x) = −3x,  P(−1 | ",
+    "accept": [
+     3
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "a) g(x) = −1,5x,  P(−1 | ",
+    "accept": [
+     1.5
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b) f(x) = −1x,  P(−1 | ",
+    "accept": [
+     1
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b) g(x) = −4x,  P(−1 | ",
+    "accept": [
+     4
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Beispiel f(x) = −1,7x. Schreibe m = 1,7/(−1). Also 1,7 nach oben und 1 nach links, du landest bei P(−1 | 1,7).",
+  "sol": "<p class=\"calc\">a) f(x) = −3x &nbsp;→&nbsp; 3 nach oben, 1 nach links, <b>P(−1 | 3)</b><br>a) g(x) = −1,5x &nbsp;→&nbsp; 1,5 nach oben, 1 nach links, <b>P(−1 | 1,5)</b><br>b) f(x) = −1x &nbsp;→&nbsp; 1 nach oben, 1 nach links, <b>P(−1 | 1)</b><br>b) g(x) = −4x &nbsp;→&nbsp; 4 nach oben, 1 nach links, <b>P(−1 | 4)</b><br>Kontrolle: Gehst du stattdessen 1 nach rechts und nach unten, landest du auf derselben Geraden.</p>"
+ },
+ {
+  "src": "LB S. 170, Nr. 6 c, d",
+  "q": "Zeichne die Graphen mit einem Steigungsdreieck nach unserer Regel. Vom Ursprung aus geht es mit dem Betrag von m nach oben und wegen des Minuszeichens 1 nach links.<br>Welchen Punkt erreichst du?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "c) f(x) = −0,4x,  P(−1 | ",
+    "accept": [
+     0.4
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "c) g(x) = −0,2x,  P(−1 | ",
+    "accept": [
+     0.2
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "d) f(x) = −0,6x,  P(−1 | ",
+    "accept": [
+     0.6
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "d) g(x) = −0,8x,  P(−1 | ",
+    "accept": [
+     0.8
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Beispiel f(x) = −1,7x. Schreibe m = 1,7/(−1). Also 1,7 nach oben und 1 nach links, du landest bei P(−1 | 1,7).",
+  "sol": "<p class=\"calc\">c) f(x) = −0,4x &nbsp;→&nbsp; 0,4 nach oben, 1 nach links, <b>P(−1 | 0,4)</b><br>c) g(x) = −0,2x &nbsp;→&nbsp; 0,2 nach oben, 1 nach links, <b>P(−1 | 0,2)</b><br>d) f(x) = −0,6x &nbsp;→&nbsp; 0,6 nach oben, 1 nach links, <b>P(−1 | 0,6)</b><br>d) g(x) = −0,8x &nbsp;→&nbsp; 0,8 nach oben, 1 nach links, <b>P(−1 | 0,8)</b><br>Kontrolle: Gehst du stattdessen 1 nach rechts und nach unten, landest du auf derselben Geraden.</p>"
+ },
+ {
+  "src": "LB S. 170, Nr. 8",
+  "q": "Die Steigung ist als Bruch angegeben. Zähler nach oben, Nenner nach rechts, bei Minus nach links. Welchen Punkt erreichst du vom Ursprung aus?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a) f(x) = 3/4 x,  P(4 | ",
+    "accept": [
+     3
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b) g(x) = 1/3 x,  P(3 | ",
+    "accept": [
+     1
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "c) f(x) = −2/3 x,  P(−3 | ",
+    "accept": [
+     2
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "d) g(x) = −1/4 x,  P(−4 | ",
+    "accept": [
+     1
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Bei 3/4 gehst du 4 nach rechts und 3 nach oben. Bei −2/3 gehst du 2 nach oben und 3 nach links.",
+  "sol": "<p class=\"calc\">a) 4 nach rechts, 3 nach oben, <b>P(4 | 3)</b><br>b) 3 nach rechts, 1 nach oben, <b>P(3 | 1)</b><br>c) 2 nach oben, 3 nach links, <b>P(−3 | 2)</b><br>d) 1 nach oben, 4 nach links, <b>P(−4 | 1)</b></p>"
+ },
+ {
+  "src": "LB S. 180, Nr. 3",
+  "q": "Zeichne den Graphen ohne Wertetabelle, nur mit Steigungsdreieck. Welchen Punkt erreichst du vom Ursprung aus?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a) y = 2,7x,  P(1 | ",
+    "accept": [
+     2.7
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b) y = −1,7x,  P(−1 | ",
+    "accept": [
+     1.7
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "c) y = 2/7 x,  P(7 | ",
+    "accept": [
+     2
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "d) y = −3/5 x,  P(−5 | ",
+    "accept": [
+     3
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Zähler nach oben, Nenner nach rechts, bei Minus nach links. Bei 2,7 ist der Nenner 1.",
+  "sol": "<p class=\"calc\">a) 1 nach rechts, 2,7 nach oben, <b>P(1 | 2,7)</b><br>b) 1,7 nach oben, 1 nach links, <b>P(−1 | 1,7)</b><br>c) 7 nach rechts, 2 nach oben, <b>P(7 | 2)</b><br>d) 3 nach oben, 5 nach links, <b>P(−5 | 3)</b></p>"
  },
  {
   "src": "Übungsaufgabe zu AH S. 72, Nr. 6",
@@ -588,7 +1032,7 @@ function render(){
           <input type="text" inputmode="text" ${p.type==="num"?'':'class="wide"'} data-kind="${p.type}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="in${i}_${j}">
           ${p.unit?`<span class="unit">${p.unit}</span>`:""}</div>`;
       } else {
-        html += `<div class="mc" role="group" aria-label="Antwortmöglichkeiten">${p.options.map((o,k)=>
+        html += (p.label?`<div class="mclabel"><b>${p.label}</b></div>`:"")+`<div class="mc" role="group" aria-label="Antwortmöglichkeiten">${p.options.map((o,k)=>
           `<button type="button" aria-pressed="false" data-i="${i}" data-j="${j}" data-k="${k}">${o}</button>`).join("")}</div>`;
       }
     });
