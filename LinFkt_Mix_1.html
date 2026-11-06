@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lineare Funktionen y = m · x – Mathematik Klasse 8</title>
+<style>
+  :root{
+    --paper:#fdfdfb; --grid:#e3ebf5; --ink:#1d2433; --blue:#1f4fa3; --blue-soft:#e8eefa;
+    --red:#c22f3a; --red-soft:#fbe9ea; --green:#2c7a4b; --green-soft:#e5f3ea; --muted:#5d6678; --line:#c9d3e2;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; color:var(--ink); font:17px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:28px 18px 80px}
+  header h1{font-family:Georgia,"Times New Roman",serif;font-size:2rem;line-height:1.2;margin:0 0 6px;color:var(--blue)}
+  header p{margin:0 0 6px;color:var(--muted)}
+  .bar{position:sticky;top:0;z-index:5;background:rgba(253,253,251,.96);border-bottom:2px solid var(--blue);
+       margin:18px -18px 22px;padding:10px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .meter{flex:1;min-width:160px;height:12px;background:var(--blue-soft);border-radius:6px;overflow:hidden}
+  .meter span{display:block;height:100%;width:0;background:var(--green);transition:width .4s}
+  .score{font-weight:600;white-space:nowrap}
+  .task{background:#fff;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:6px;
+        padding:16px 18px 14px;margin:0 0 18px}
+  .task.done{border-left-color:var(--green)}
+  .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+  .num{font-family:Georgia,serif;font-size:1.35rem;font-weight:700;color:var(--blue)}
+  .src{font-size:.82rem;color:var(--muted);text-align:right}
+  .q{margin:2px 0 10px}
+  .field{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+  input[type=text]{font:inherit;font-size:1.05rem;padding:7px 10px;width:150px;border:none;border-bottom:2px solid var(--blue);
+        background:var(--blue-soft);border-radius:4px 4px 0 0;color:var(--blue)}
+  input.wide{width:min(100%,320px)}
+  input[type=text]:focus{outline:3px solid #9fb8e6;outline-offset:1px}
+  input.ok{border-bottom-color:var(--green);background:var(--green-soft);color:var(--green)}
+  input.no{border-bottom-color:var(--red);background:var(--red-soft);color:var(--red)}
+  .unit{color:var(--muted)}
+  .mc{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+  .mc button{font:inherit;padding:7px 14px;border:2px solid var(--line);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}
+  .mc button[aria-pressed=true]{border-color:var(--blue);background:var(--blue-soft);color:var(--blue);font-weight:600}
+  .mc button.ok{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+  .mc button.no{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .btn{font:inherit;font-size:.95rem;padding:7px 14px;border-radius:6px;cursor:pointer;border:2px solid var(--blue);background:var(--blue);color:#fff}
+  .btn.ghost{background:#fff;color:var(--blue)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn:focus-visible,.mc button:focus-visible{outline:3px solid #9fb8e6;outline-offset:2px}
+  .fb{margin-top:8px;font-weight:600;min-height:1.2em}
+  .fb.ok{color:var(--green)} .fb.no{color:var(--red)}
+  .box{margin-top:10px;padding:12px 14px;border-radius:6px;font-size:.97rem}
+  .tip{background:#fff8e1;border:1px dashed #d9b44a}
+  .sol{background:var(--green-soft);border:1px solid #b9dcc6}
+  .sol h4{margin:0 0 6px;font-size:1rem;color:var(--green)}
+  .sol .alt{margin-top:8px;padding-top:8px;border-top:1px dashed #9ccab0}
+  .calc{font-family:Georgia,serif;font-size:1.02rem}
+  table.wt{border-collapse:collapse;margin:6px 0}
+  table.wt td,table.wt th{border:1px solid var(--line);padding:4px 12px;text-align:center}
+  svg{max-width:100%;height:auto}
+  .end{background:#fff;border:2px solid var(--blue);border-radius:8px;padding:18px;margin-top:26px}
+  .end h2{font-family:Georgia,serif;margin:0 0 8px;color:var(--blue)}
+  footer{margin-top:30px;font-size:.82rem;color:var(--muted)}
+
+  .wrap{padding-bottom:140px}
+  .tools{background:#fff;border:2px solid var(--blue);border-radius:8px;margin:14px 0 4px}
+  .tools summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--blue);list-style:none;font-size:1.05rem}
+  .tools summary::-webkit-details-marker{display:none}
+  .tools summary::after{content:" ▾"} .tools[open] summary::after{content:" ▴"}
+  .tools .inner{padding:0 14px 12px}
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .fcard{background:var(--blue-soft);border-radius:6px;padding:10px 12px}
+  .fcard h3{margin:0 0 4px;font-size:.95rem;color:var(--blue)}
+  .fcard .f{font-family:Georgia,serif;font-size:1.12rem;line-height:1.5}
+  .tools .steps{margin:10px 0 0;padding-left:20px} .tools .steps li{margin:2px 0}
+  .warn{color:var(--red);font-weight:600;margin:10px 0 0}
+  .fab{position:fixed;right:12px;bottom:12px;z-index:20;display:flex;flex-direction:column;gap:8px}
+  .fab button{font:inherit;font-size:.95rem;padding:9px 14px;border-radius:24px;border:2px solid var(--blue);background:#fff;color:var(--blue);box-shadow:0 2px 8px rgba(0,0,0,.18);cursor:pointer;font-weight:600}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:3px solid var(--blue);box-shadow:0 -4px 16px rgba(0,0,0,.2);max-height:82vh;overflow:auto;padding:12px 16px 18px}
+  .sheet .shead{display:flex;justify-content:space-between;align-items:center;margin:0 auto 8px;max-width:780px}
+  .sheet .shead b{color:var(--blue);font-size:1.05rem}
+  .sheet .sbody{max-width:780px;margin:0 auto}
+  .calc-wrap{max-width:380px;margin:0 auto}
+  #calcIn{width:100%;font:inherit;font-size:1.35rem;text-align:right;padding:8px 10px;border:2px solid var(--blue);border-radius:6px;color:var(--ink);background:var(--blue-soft)}
+  .calc-res{text-align:right;font-size:1.05rem;color:var(--muted);min-height:1.6em;margin:4px 2px 8px}
+  .ckeys{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+  .ckeys button{font:inherit;font-size:1.15rem;padding:11px 0;border:1px solid var(--line);border-radius:6px;background:var(--blue-soft);color:var(--ink);cursor:pointer;touch-action:manipulation}
+  .ckeys button.op{background:#fff;color:var(--blue);font-weight:700}
+  .ckeys button.eq{background:var(--blue);color:#fff;grid-column:span 3;font-weight:700}
+  .keystrip{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px}
+  .keystrip button{font:inherit;min-width:44px;padding:7px 8px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--blue);cursor:pointer;font-weight:700;touch-action:manipulation}
+  input.half{border-bottom-color:#c98a12;background:#fff4dc;color:#8a5a00}
+  .fb.half{color:#8a5a00}
+  @media print{ .fab,.sheet,.keystrip{display:none} }
+  @media (max-width:520px){ .fab button{padding:7px 11px;font-size:.88rem}  body{font-size:16px} header h1{font-size:1.6rem} .head{flex-direction:column;gap:0} .src{text-align:left} }
+  @media (prefers-reduced-motion:reduce){ .meter span{transition:none} }
+  @media print{ .bar,.actions,.fb{display:none} body{background:none} .task{break-inside:avoid} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Lineare Funktionen y = m · x</h1>
+    <p>Mathematik Klasse 8, Lineare Funktionen. Set 1 mit 11 Aufgaben aus dem Arbeitsheft S. 71 und 72 zum Üben mit Selbstkontrolle.</p>
+    <p>So gehst du vor. Löse jede Aufgabe zuerst im Heft und zeichne die Graphen dort ein. Trage dann dein Ergebnis ein und tippe auf „Prüfen“. Komma oder Punkt ist egal, und du darfst auch f(x) = oder y = davor schreiben. Unter dem aktiven Feld erscheinen Zusatztasten für Minus und Komma. Den Wissensbaustein und den Taschenrechner findest du jederzeit unten rechts.</p>
+    <details class="tools" open><summary>🧰 Wissensbaustein</summary><div class="inner">
+<div class="fgrid">
+ <div class="fcard"><h3>Funktionsgleichung</h3><div class="f">f(x) = m · x</div></div>
+ <div class="fcard"><h3>Graph</h3><div class="f">Gerade durch (0|0)</div></div>
+ <div class="fcard"><h3>m ist die Steigung</h3><div class="f">m &gt; 0 steigt, m &lt; 0 fällt</div></div>
+</div>
+<p><b>Funktionswert berechnen.</b> Setze den x-Wert ein. Beispiel f(x) = 1,4x und x = −2 ergibt f(−2) = 1,4 · (−2) = −2,8, also der Punkt P(−2 | −2,8).</p>
+<p><b>Steigungsdreieck.</b> Wird x um 1 größer, ändert sich y um m. Bei f(x) = 1,2x gehst du 1 nach rechts und 1,2 nach oben. Bei 2 Schritten nach rechts sind es 2 · 1,2 = 2,4 nach oben.</p>
+<ol class="steps">
+ <li>Starte im Ursprung (0|0).</li>
+ <li>Schreibe m als Bruch, zum Beispiel 1,2 = 1,2/1 oder −0,7 = 0,7/(−1).</li>
+ <li>Zähler nach oben, Nenner nach rechts. Ist m negativ, gehst du nach links.</li>
+ <li>Verbinde die Punkte mit dem Lineal und verlängere die Gerade.</li>
+</ol>
+<p class="warn">Je weiter m von 0 entfernt ist, desto steiler ist die Gerade. Minus mal Minus ergibt Plus!</p>
+</div></details>
+  </header>
+
+  <div class="bar" role="status" aria-live="polite">
+    <div class="meter" aria-hidden="true"><span id="meter"></span></div>
+    <div class="score" id="score">0 Punkte</div>
+    <button class="btn ghost" id="reset" type="button">Neu starten</button>
+  </div>
+
+  <main id="tasks"></main>
+
+  <section class="end" id="end">
+    <h2>Deine Auswertung</h2>
+    <p id="endText">Bearbeite die Aufgaben und klicke dann hier auf „Auswerten“.</p>
+    <button class="btn" id="evalBtn" type="button">Auswerten</button>
+  </section>
+
+  <footer>Aufgaben aus dem Arbeitsheft S. 71 und 72, für den Unterricht aufbereitet. Die Seite speichert keine Eingaben und sendet keine Daten.</footer>
+</div>
+
+<div class="fab">
+  <button type="button" id="fabTools" aria-controls="toolSheet">🧰 Wissen</button>
+  <button type="button" id="fabCalc" aria-controls="calcSheet">🧮 Rechner</button>
+</div>
+
+<div class="sheet" id="toolSheet" hidden role="dialog" aria-label="Werkzeugkasten">
+  <div class="shead"><b>🧰 Wissensbaustein</b><button class="btn ghost" type="button" data-close="toolSheet">Schließen</button></div>
+  <div class="sbody" id="toolSheetBody"></div>
+</div>
+
+<div class="sheet" id="calcSheet" hidden role="dialog" aria-label="Taschenrechner">
+  <div class="shead"><b>🧮 Taschenrechner</b><button class="btn ghost" type="button" data-close="calcSheet">Schließen</button></div>
+  <div class="calc-wrap">
+    <input type="text" id="calcIn" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Rechnung">
+    <div class="calc-res" id="calcRes" aria-live="polite"></div>
+    <div class="ckeys" id="ckeys">
+      <button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button><button type="button" class="op" data-k=":">÷</button><button type="button" class="op" data-k="C">C</button>
+      <button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button><button type="button" class="op" data-k="·">·</button><button type="button" class="op" data-k="DEL">⌫</button>
+      <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button><button type="button" class="op" data-k="−">−</button><button type="button" class="op" data-k="(">(</button>
+      <button type="button" data-k="0">0</button><button type="button" data-k=",">,</button><button type="button" class="op" data-k="²">x²</button><button type="button" class="op" data-k="+">+</button><button type="button" class="op" data-k=")">)</button>
+      <button type="button" class="op" data-k="√">√</button><button type="button" class="op" data-k="^">^</button><button type="button" class="eq" data-k="=">=</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Aufgabentypen:
+   "num"  Zahlenfeld, accept = Liste akzeptierter Zahlen (z. B. Rundungsvarianten, andere Einheiten)
+   "mc"   Auswahl, options = Liste, correct = Index der richtigen Option
+   "text" Kurzantwort, accept = Liste akzeptierter Wörter/Begriffe (Groß-/Kleinschreibung egal)
+   Optional pro Aufgabe: fig (SVG/HTML), points (Gesamtpunkte, nur bei komplett richtig), alt (Auch-richtig-Hinweis) */
+const T = [
+ {
+  "src": "AH S. 71, Nr. 1a",
+  "q": "Die Funktion f hat die Funktionsgleichung f(x) = 1,4x.<br>Vervollständige die Wertetabelle. Den Wert f(−2) = 1,4 · (−2) = −2,8 kennst du schon aus dem Beispiel.",
+  "parts": [
+   {
+    "type": "num",
+    "label": "f(−3) =",
+    "accept": [
+     -4.2
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(−1) =",
+    "accept": [
+     -1.4
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(0) =",
+    "accept": [
+     0.0
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(1) =",
+    "accept": [
+     1.4
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(2) =",
+    "accept": [
+     2.8
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(3) =",
+    "accept": [
+     4.2
+    ]
+   }
+  ],
+  "tip": "Setze den x-Wert für x ein und rechne 1,4 mal x. Minus mal Plus ergibt Minus.",
+  "sol": "<p class=\"calc\">f(−3) = 1,4 · (−3) = <b>−4,2</b><br>f(−2) = 1,4 · (−2) = <b>−2,8</b><br>f(−1) = 1,4 · (−1) = <b>−1,4</b><br>f(0) = 1,4 · 0 = <b>0</b><br>f(1) = 1,4 · 1 = <b>1,4</b><br>f(2) = 1,4 · 2 = <b>2,8</b><br>f(3) = 1,4 · 3 = <b>4,2</b></p>"
+ },
+ {
+  "src": "AH S. 71, Nr. 1a",
+  "q": "Die Funktion g hat die Funktionsgleichung g(x) = −0,8x.<br>Vervollständige die Wertetabelle.",
+  "parts": [
+   {
+    "type": "num",
+    "label": "g(−3) =",
+    "accept": [
+     2.4
+    ]
+   },
+   {
+    "type": "num",
+    "label": "g(−2) =",
+    "accept": [
+     1.6
+    ]
+   },
+   {
+    "type": "num",
+    "label": "g(−1) =",
+    "accept": [
+     0.8
+    ]
+   },
+   {
+    "type": "num",
+    "label": "g(0) =",
+    "accept": [
+     -0.0
+    ]
+   },
+   {
+    "type": "num",
+    "label": "g(1) =",
+    "accept": [
+     -0.8
+    ]
+   },
+   {
+    "type": "num",
+    "label": "g(2) =",
+    "accept": [
+     -1.6
+    ]
+   },
+   {
+    "type": "num",
+    "label": "g(3) =",
+    "accept": [
+     -2.4
+    ]
+   }
+  ],
+  "tip": "Achte auf die Vorzeichen. Minus mal Minus ergibt Plus, Minus mal Plus ergibt Minus.",
+  "sol": "<p class=\"calc\">g(−3) = −0,8 · (−3) = <b>2,4</b><br>g(−2) = −0,8 · (−2) = <b>1,6</b><br>g(−1) = −0,8 · (−1) = <b>0,8</b><br>g(0) = −0,8 · 0 = <b>0</b><br>g(1) = −0,8 · 1 = <b>−0,8</b><br>g(2) = −0,8 · 2 = <b>−1,6</b><br>g(3) = −0,8 · 3 = <b>−2,4</b></p>"
+ },
+ {
+  "src": "AH S. 71, Nr. 1c",
+  "q": "Zeichne die Graphen von f(x) = 1,4x und g(x) = −0,8x im Heft. Vergleiche dann den Verlauf beider Geraden.",
+  "parts": [
+   {
+    "type": "mc",
+    "label": "",
+    "options": [
+     "Die Gerade von f steigt.",
+     "Die Gerade von f fällt."
+    ],
+    "correct": 0
+   },
+   {
+    "type": "mc",
+    "label": "",
+    "options": [
+     "Die Gerade von g steigt.",
+     "Die Gerade von g fällt."
+    ],
+    "correct": 1
+   },
+   {
+    "type": "mc",
+    "label": "",
+    "options": [
+     "Beide Geraden gehen durch den Ursprung (0|0).",
+     "Beide Geraden gehen durch den Punkt (0|1).",
+     "Die Geraden haben keinen gemeinsamen Punkt."
+    ],
+    "correct": 0
+   }
+  ],
+  "tip": "Schau auf das Vorzeichen von m. Und was ist f(0) und g(0)?",
+  "sol": "<p class=\"calc\">f(x) = 1,4x hat m = 1,4 > 0, also <b>steigt</b> die Gerade.<br>g(x) = −0,8x hat m = −0,8 &lt; 0, also <b>fällt</b> die Gerade.<br>f(0) = 0 und g(0) = 0, also gehen <b>beide durch den Ursprung (0|0)</b>.<br>Außerdem ist f steiler als g, weil 1,4 weiter von 0 entfernt ist als 0,8.</p>"
+ },
+ {
+  "src": "AH S. 71, Nr. 2",
+  "q": "Der Graph von y = m · x ist eine Gerade durch den Ursprung. Du brauchst also nur einen weiteren Punkt. Berechne den fehlenden y-Wert und zeichne die Gerade im Heft.",
+  "parts": [
+   {
+    "type": "num",
+    "label": "a)  g: y = 1,3x,  P(1,5 | ",
+    "accept": [
+     1.95,
+     2
+    ],
+    "tol": 1e-06,
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "b)  h: y = −0,6x,  P(3 | ",
+    "accept": [
+     -1.8
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Setze den x-Wert des Punktes in die Gleichung ein. Bei a) rechnest du 1,3 · 1,5.",
+  "sol": "<p class=\"calc\">a) y = 1,3 · 1,5 = <b>1,95</b>, also P(1,5 | 1,95)<br>b) y = −0,6 · 3 = <b>−1,8</b>, also P(3 | −1,8)<br>Verbinde den Punkt mit dem Ursprung (0|0) und verlängere die Gerade.</p>",
+  "alt": "Auch richtig: 2 bei a), wenn du gerundet hast. Du darfst im Heft auch einen anderen x-Wert wählen, je weiter weg vom Ursprung, desto genauer."
+ },
+ {
+  "src": "AH S. 71, Nr. 3a",
+  "q": "Die Funktion f hat die Funktionsgleichung y = 5x.<br>Vervollständige die Wertetabelle.",
+  "parts": [
+   {
+    "type": "num",
+    "label": "f(−3) =",
+    "accept": [
+     -15
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(−2) =",
+    "accept": [
+     -10
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(−1) =",
+    "accept": [
+     -5
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(0) =",
+    "accept": [
+     0
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(1) =",
+    "accept": [
+     5
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(2) =",
+    "accept": [
+     10
+    ]
+   },
+   {
+    "type": "num",
+    "label": "f(3) =",
+    "accept": [
+     15
+    ]
+   }
+  ],
+  "tip": "Rechne jeweils 5 mal x.",
+  "sol": "<p class=\"calc\">f(−3) = 5 · (−3) = <b>−15</b><br>f(−2) = 5 · (−2) = <b>−10</b><br>f(−1) = 5 · (−1) = <b>−5</b><br>f(0) = 5 · 0 = <b>0</b><br>f(1) = 5 · 1 = <b>5</b><br>f(2) = 5 · 2 = <b>10</b><br>f(3) = 5 · 3 = <b>15</b></p>"
+ },
+ {
+  "src": "AH S. 71, Nr. 3b",
+  "q": "Vergleiche f(−3) mit f(−2), f(−2) mit f(−1), f(−1) mit f(0) und so weiter. Was fällt dir auf?",
+  "parts": [
+   {
+    "type": "mc",
+    "options": [
+     "Wird x um 1 größer, wird f(x) immer um 5 größer.",
+     "Wird x um 1 größer, wird f(x) immer um 1 größer.",
+     "Wird x um 1 größer, verdoppelt sich f(x).",
+     "Wird x um 1 größer, wird f(x) um 5 kleiner."
+    ],
+    "correct": 0
+   }
+  ],
+  "tip": "Rechne die Differenz aus, zum Beispiel f(−2) − f(−3) = −10 − (−15).",
+  "sol": "<p class=\"calc\">−15 → −10 → −5 → 0 → 5 → 10 → 15<br>Jeder Schritt ist <b>+5</b>. Die Zahl 5 ist genau das m aus y = 5x.</p>"
+ },
+ {
+  "src": "AH S. 71, Nr. 3c",
+  "q": "Vergleiche f(−2) mit f(0), f(0) mit f(2) und f(1) mit f(3). Was stellst du fest?",
+  "parts": [
+   {
+    "type": "mc",
+    "options": [
+     "Wird x um 2 größer, wird f(x) um 10 größer.",
+     "Wird x um 2 größer, wird f(x) um 5 größer.",
+     "Wird x um 2 größer, wird f(x) um 2 größer."
+    ],
+    "correct": 0
+   }
+  ],
+  "tip": "Bei einem Schritt von 1 kommt 5 dazu. Wie viel ist es dann bei 2 Schritten?",
+  "sol": "<p class=\"calc\">f(−2) = −10 und f(0) = 0, Unterschied 10<br>f(0) = 0 und f(2) = 10, Unterschied 10<br>f(1) = 5 und f(3) = 15, Unterschied 10<br>Also <b>x + 2 bedeutet y + 10</b>, denn 2 · 5 = 10.</p>"
+ },
+ {
+  "src": "AH S. 72, Nr. 4b",
+  "q": "Die Funktion f hat die Gleichung f(x) = 1,2x. Wird der x-Wert um 1 erhöht, erhöht sich der y-Wert um 1,2.<br>Zeichne im Heft Steigungsdreiecke ein und gib die Seitenlänge in y-Richtung an.",
+  "parts": [
+   {
+    "type": "num",
+    "label": "2 cm nach rechts, also nach oben",
+    "accept": [
+     2.4
+    ],
+    "unit": "cm"
+   },
+   {
+    "type": "num",
+    "label": "3 cm nach rechts, also nach oben",
+    "accept": [
+     3.6
+    ],
+    "unit": "cm"
+   }
+  ],
+  "tip": "Ein Schritt nach rechts bedeutet 1,2 nach oben. Wie viel sind es bei zwei oder drei Schritten?",
+  "sol": "<p class=\"calc\">2 · 1,2 = <b>2,4 cm</b><br>3 · 1,2 = <b>3,6 cm</b></p>"
+ },
+ {
+  "src": "AH S. 72, Nr. 5",
+  "q": "Die Funktion f hat die Gleichung f(x) = −0,7x. Wird der x-Wert um 1 erhöht, nimmt der y-Wert um 0,7 ab.<br>Um wie viel nimmt der y-Wert ab, wenn du 2 cm (3 cm) nach rechts gehst?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "2 cm nach rechts, y nimmt ab um",
+    "accept": [
+     1.4,
+     -1.4
+    ],
+    "unit": "cm"
+   },
+   {
+    "type": "num",
+    "label": "3 cm nach rechts, y nimmt ab um",
+    "accept": [
+     2.1,
+     -2.1
+    ],
+    "unit": "cm"
+   }
+  ],
+  "tip": "Ein Schritt nach rechts bedeutet 0,7 nach unten. Multipliziere mit der Anzahl der Schritte.",
+  "sol": "<p class=\"calc\">2 · 0,7 = <b>1,4 cm</b> nach unten<br>3 · 0,7 = <b>2,1 cm</b> nach unten<br>Mit unserer Tafel-Regel geht es genauso andersherum, also 1,4 nach oben und 2 nach links.</p>",
+  "alt": "Auch richtig: −1,4 und −2,1."
+ },
+ {
+  "src": "AH S. 72, Nr. 6",
+  "q": "Zeichne die Graphen im Heft mit einem Steigungsdreieck vom Ursprung (0|0) aus.<br>Welchen y-Wert erreichst du, wenn du 1 nach rechts gehst?",
+  "parts": [
+   {
+    "type": "num",
+    "label": "g(x) = −0,9x,  P(1 | ",
+    "accept": [
+     -0.9
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "h(x) = 1,4x,  P(1 | ",
+    "accept": [
+     1.4
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "k(x) = 2,3x,  P(1 | ",
+    "accept": [
+     2.3
+    ],
+    "unit": ")"
+   },
+   {
+    "type": "num",
+    "label": "l(x) = −2,1x,  P(1 | ",
+    "accept": [
+     -2.1
+    ],
+    "unit": ")"
+   }
+  ],
+  "tip": "Bei 1 nach rechts gehst du genau m nach oben, bei negativem m nach unten.",
+  "sol": "<p class=\"calc\">g(x) = −0,9x &nbsp;→&nbsp; 1 nach rechts, 0,9 nach unten, also <b>P(1 | −0,9)</b><br>h(x) = 1,4x &nbsp;→&nbsp; 1 nach rechts, 1,4 nach oben, also <b>P(1 | 1,4)</b><br>k(x) = 2,3x &nbsp;→&nbsp; 1 nach rechts, 2,3 nach oben, also <b>P(1 | 2,3)</b><br>l(x) = −2,1x &nbsp;→&nbsp; 1 nach rechts, 2,1 nach unten, also <b>P(1 | −2,1)</b></p>"
+ },
+ {
+  "src": "Übungsaufgabe zu AH S. 72, Nr. 6",
+  "q": "Betrachte noch einmal g(x) = −0,9x, h(x) = 1,4x, k(x) = 2,3x und l(x) = −2,1x.<br>Erste Auswahl: Welche Geraden steigen? Zweite Auswahl: Welche Gerade ist am steilsten?",
+  "parts": [
+   {
+    "type": "mc",
+    "options": [
+     "g und h",
+     "h und k",
+     "g und l",
+     "k und l"
+    ],
+    "correct": 1
+   },
+   {
+    "type": "mc",
+    "options": [
+     "g",
+     "h",
+     "k",
+     "l"
+    ],
+    "correct": 2
+   }
+  ],
+  "tip": "Zuerst steigende Geraden finden, also m > 0. Für die steilste Gerade zählt, wie weit m von 0 entfernt ist, egal ob Plus oder Minus.",
+  "sol": "<p class=\"calc\">Steigend sind die Geraden mit positivem m, also <b>h und k</b>.<br>Am steilsten ist <b>k</b>, denn 2,3 ist am weitesten von 0 entfernt (2,3 > 2,1 > 1,4 > 0,9).</p>"
+ }
+];
+
+const LOB = ["Hervorragend, das sitzt!", "Gut gemacht, nur noch wenige Lücken.", "Ein solider Anfang. Wiederhole die Aufgaben, die noch nicht geklappt haben.", "Hier lohnt sich noch Übung. Nutze die Tipps und Lösungsvorschläge."];
+
+const TOTAL = T.reduce((s,t)=>s+(t.points||t.parts.length),0);
+const state = T.map(t=>({checked:false, ok:t.parts.map(()=>false), mc:t.parts.map(()=>null)}));
+
+function parseNum(raw){
+  if(!raw) return NaN;
+  let s = raw.toLowerCase().replace(/\s+/g,"").replace(/[−–]/g,"-")
+    .replace(/^[a-zα-ω]+[0-9]*(\([^)]*\))?=/,"")
+    .replace(/[^\d.,\/-].*$/,"")
+    .replace(",",".");
+  if(/^-?\d+(\.\d+)?\/-?\d+(\.\d+)?$/.test(s)){ const [a,b]=s.split("/").map(Number); return a/b; }
+  return /^-?\d*\.?\d+$/.test(s) ? Number(s) : NaN;
+}
+function normText(raw){
+  return (raw||"").toLowerCase().trim().replace(/\s+/g," ").replace(/[.!?;:,"„“']/g,"");
+}
+
+function render(){
+  const box = document.getElementById("tasks");
+  box.innerHTML = "";
+  T.forEach((t,i)=>{
+    const el = document.createElement("article");
+    el.className = "task"; el.id = "t"+i;
+    let html = `<div class="head"><span class="num">Aufgabe ${i+1}</span><span class="src">${t.src||""}</span></div>
+      <div class="q">${t.q}</div>${t.fig?`<div>${t.fig}</div>`:""}`;
+    t.parts.forEach((p,j)=>{
+      if(p.type==="num" || p.type==="text" || p.type==="term"){
+        html += `<div class="field"><label for="in${i}_${j}">${p.label||"Antwort:"}</label>
+          <input type="text" inputmode="text" ${p.type==="num"?'':'class="wide"'} data-kind="${p.type}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="in${i}_${j}">
+          ${p.unit?`<span class="unit">${p.unit}</span>`:""}</div>`;
+      } else {
+        html += `<div class="mc" role="group" aria-label="Antwortmöglichkeiten">${p.options.map((o,k)=>
+          `<button type="button" aria-pressed="false" data-i="${i}" data-j="${j}" data-k="${k}">${o}</button>`).join("")}</div>`;
+      }
+    });
+    html += `<div class="actions">
+        <button class="btn" type="button" data-act="check" data-i="${i}">Prüfen</button>
+        ${t.tip?`<button class="btn ghost" type="button" data-act="tip" data-i="${i}">Tipp</button>`:""}
+        <button class="btn ghost" type="button" data-act="sol" data-i="${i}" disabled title="Erst nach dem Prüfen verfügbar">Lösungsvorschlag</button>
+      </div>
+      <div class="fb" id="fb${i}" aria-live="polite"></div>
+      ${t.tip?`<div class="box tip" id="tip${i}" hidden>💡 ${t.tip}</div>`:""}
+      <div class="box sol" id="sol${i}" hidden><h4>Lösungsvorschlag</h4>${t.sol}${t.alt?`<div class="alt">${t.alt}</div>`:""}</div>`;
+    el.innerHTML = html;
+    box.appendChild(el);
+  });
+}
+
+function check(i){
+  const t=T[i], st=state[i];
+  let allOk=true, anyEmpty=false, formModes=new Set(), unreadable=false;
+  t.parts.forEach((p,j)=>{
+    let ok=false;
+    if(p.type==="term"){
+      const inp=document.getElementById(`in${i}_${j}`);
+      inp.classList.remove("ok","no","half");
+      if(inp.value.trim()===""){ anyEmpty=true; }
+      else {
+        const r=termCheck(inp.value,p);
+        ok = r==="ok";
+        if(r==="form"){ formModes.add(p.mode); inp.classList.add("half"); }
+        else { if(r==="err") unreadable=true; inp.classList.add(ok?"ok":"no"); }
+      }
+    } else if(p.type==="num" || p.type==="text"){
+      const inp=document.getElementById(`in${i}_${j}`);
+      if(inp.value.trim()==="") anyEmpty=true;
+      if(p.type==="num"){
+        const v=parseNum(inp.value), tol=p.tol||1e-6;
+        ok = !isNaN(v) && p.accept.some(a=>Math.abs(a-v)<=tol);
+      } else {
+        const v=normText(inp.value);
+        ok = v!=="" && p.accept.some(a=>normText(a)===v);
+      }
+      inp.classList.remove("ok","no"); if(inp.value.trim()!=="") inp.classList.add(ok?"ok":"no");
+    } else {
+      const sel=st.mc[j];
+      if(sel===null) anyEmpty=true;
+      ok = sel===p.correct;
+      document.querySelectorAll(`#t${i} .mc button[data-j="${j}"]`).forEach(b=>{
+        b.classList.remove("ok","no");
+        if(+b.dataset.k===sel) b.classList.add(ok?"ok":"no");
+      });
+    }
+    st.ok[j]=ok; if(!ok) allOk=false;
+  });
+  const fb=document.getElementById("fb"+i);
+  if(anyEmpty && !allOk){ fb.className="fb no"; fb.textContent="Trage zuerst eine Antwort ein oder wähle eine aus."; return; }
+  st.checked=true;
+  fb.className="fb "+(allOk?"ok":"no");
+  if(allOk) fb.textContent="✓ Richtig! Vergleiche trotzdem deinen Weg mit dem Lösungsvorschlag.";
+  else if(formModes.size){
+    fb.className="fb half";
+    let m="Fast! Der gelb markierte Term hat den richtigen Wert, ist aber noch nicht fertig. ";
+    if(formModes.has("expand")) m+="Löse alle Klammern auf, quadriere Zahlen wie (3x)² = 9x² aus und fasse zusammen. ";
+    if(formModes.has("factor")) m+="Hier soll ein Produkt mit Klammern herauskommen, also ein Binom wie (a + 4)². ";
+    if(unreadable) m+="Eine Eingabe konnte nicht gelesen werden. ";
+    if(document.querySelectorAll(`#t${i} input.no`).length) m+="Prüfe außerdem die rot markierte Antwort.";
+    fb.textContent=m;
+  }
+  else if(unreadable) fb.textContent="Eine Eingabe kann ich nicht lesen. Schreibe zum Beispiel x^2 + 2x + 1 oder (a + 4)^2.";
+  else if(st.ok.some(Boolean)) fb.textContent="Teilweise richtig. Prüfe die rot markierte Antwort noch einmal.";
+  else fb.textContent="✗ Noch nicht richtig. Schau dir den Tipp an und versuche es noch einmal.";
+  const sb=document.querySelector(`#t${i} [data-act=sol]`); sb.disabled=false; sb.removeAttribute("title");
+  document.getElementById("t"+i).classList.toggle("done",allOk);
+  updateScore();
+}
+
+function points(i){
+  const t=T[i], ok=state[i].ok;
+  if(t.points) return ok.every(Boolean)?t.points:0;
+  return ok.filter(Boolean).length;
+}
+function updateScore(){
+  const s=T.reduce((a,_,i)=>a+points(i),0);
+  document.getElementById("score").textContent=`${s} von ${TOTAL} Punkten`;
+  document.getElementById("meter").style.width=(s/TOTAL*100)+"%";
+  return s;
+}
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  if(b.closest(".keystrip,.ckeys,.fab,.shead")) return;
+  if(b.closest(".mc")){
+    const i=+b.dataset.i, j=+b.dataset.j, k=+b.dataset.k;
+    state[i].mc[j]=k;
+    b.parentElement.querySelectorAll("button").forEach(x=>{x.setAttribute("aria-pressed",x===b?"true":"false"); x.classList.remove("ok","no");});
+    return;
+  }
+  const i=+b.dataset.i;
+  if(b.dataset.act==="check") check(i);
+  if(b.dataset.act==="tip"){ const t=document.getElementById("tip"+i); t.hidden=!t.hidden; }
+  if(b.dataset.act==="sol"){ const s=document.getElementById("sol"+i); s.hidden=!s.hidden; b.textContent=s.hidden?"Lösungsvorschlag":"Lösung ausblenden"; }
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter" && e.target.matches(".task input[type=text]")){ e.preventDefault(); check(+e.target.id.slice(2).split("_")[0]); }
+  if(e.key==="Enter" && e.target.id==="calcIn"){ e.preventDefault(); calcEval(); }
+});
+
+document.getElementById("evalBtn").addEventListener("click",()=>{
+  const s=updateScore();
+  const open=[], wrong=[];
+  T.forEach((t,i)=>{ if(!state[i].checked) open.push(i+1); else if(points(i)<(t.points||t.parts.length)) wrong.push(i+1); });
+  const pct=Math.round(s/TOTAL*100);
+  let msg=`Du hast <b>${s} von ${TOTAL} Punkten</b> erreicht (${pct} %). `;
+  msg += pct>=90?LOB[0]:pct>=70?LOB[1]:pct>=50?LOB[2]:LOB[3];
+  if(wrong.length) msg+=`<br>Noch einmal ansehen: Aufgabe ${wrong.join(", ")}.`;
+  if(open.length) msg+=`<br>Noch nicht bearbeitet: Aufgabe ${open.join(", ")}.`;
+  document.getElementById("endText").innerHTML=msg;
+});
+
+document.getElementById("reset").addEventListener("click",()=>{
+  if(!confirm("Alle Eingaben löschen und neu beginnen?")) return;
+  state.forEach(s=>{s.checked=false; s.ok=s.ok.map(()=>false); s.mc=s.mc.map(()=>null);});
+  parkStrip(); render(); updateScore();
+  document.getElementById("endText").textContent="Bearbeite die Aufgaben und klicke dann hier auf „Auswerten“.";
+  window.scrollTo(0,0);
+});
+
+/* ---------- Terme lesen und vergleichen ---------- */
+const SUP="⁰¹²³⁴⁵⁶⁷⁸⁹";
+function tokenize(raw){
+  let s=String(raw).replace(/[−–—]/g,"-").replace(/[·×⋅∙•]/g,"*").replace(/[:÷]/g,"/")
+    .replace(/½/g,"(1/2)").replace(/¼/g,"(1/4)").replace(/¾/g,"(3/4)")
+    .replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g,m=>"^"+[...m].map(c=>SUP.indexOf(c)).join(""))
+    .replace(/\s+/g,"").toLowerCase().replace(/^=/,"");
+  const tk=[]; let i=0;
+  while(i<s.length){
+    const c=s[i];
+    if(/[0-9.,]/.test(c)){ let j=i; while(j<s.length&&/[0-9.,]/.test(s[j]))j++;
+      const t=s.slice(i,j); if((t.match(/[.,]/g)||[]).length>1) throw new Error("zahl");
+      const n=Number(t.replace(",",".")); if(isNaN(n)) throw new Error("zahl"); tk.push({t:"n",v:n}); i=j; }
+    else if(/[a-z]/.test(c)){ tk.push({t:"v",v:c}); i++; }
+    else if("+-*/^()√".includes(c)){ tk.push({t:c}); i++; }
+    else if("[{".includes(c)){ tk.push({t:"("}); i++; }
+    else if("]}".includes(c)){ tk.push({t:")"}); i++; }
+    else throw new Error("zeichen");
+  }
+  return tk;
+}
+function parseTerm(raw){
+  const tk=tokenize(raw); let p=0;
+  if(!tk.length) throw new Error("leer");
+  const peek=()=>tk[p], eat=t=>{ if(tk[p]&&tk[p].t===t){p++;return true;} return false; };
+  function expr(){ let n=term(); for(;;){ if(eat("+")) n={o:"+",a:n,b:term()}; else if(eat("-")) n={o:"-",a:n,b:term()}; else return n; } }
+  function term(){ let n=unary(); for(;;){ const k=peek(); if(!k) return n;
+    if(k.t==="*"){p++; n={o:"*",a:n,b:unary()};}
+    else if(k.t==="/"){p++; n={o:"/",a:n,b:unary()};}
+    else if(k.t==="n"||k.t==="v"||k.t==="("||k.t==="√"){ n={o:"*",a:n,b:power()}; }
+    else return n; } }
+  function unary(){ if(eat("-")) return {o:"neg",a:unary()}; if(eat("+")) return unary(); return power(); }
+  function power(){ const b=primary(); if(eat("^")) return {o:"^",a:b,b:unary()}; return b; }
+  function primary(){ const k=tk[p++]; if(!k) throw new Error("ende");
+    if(k.t==="n") return {o:"n",v:k.v};
+    if(k.t==="v") return {o:"v",v:k.v};
+    if(k.t==="√") return {o:"sqrt",a:power()};
+    if(k.t==="("){ const n=expr(); if(!eat(")")) throw new Error("klammer"); return n; }
+    throw new Error("unerwartet"); }
+  const n=expr(); if(p!==tk.length) throw new Error("rest"); return n;
+}
+function ev(n,env){
+  switch(n.o){
+    case "n": return n.v; case "v": return (n.v in env)?env[n.v]:NaN;
+    case "+": return ev(n.a,env)+ev(n.b,env); case "-": return ev(n.a,env)-ev(n.b,env);
+    case "*": return ev(n.a,env)*ev(n.b,env); case "/": return ev(n.a,env)/ev(n.b,env);
+    case "^": return Math.pow(ev(n.a,env),ev(n.b,env)); case "neg": return -ev(n.a,env);
+    case "sqrt": return Math.sqrt(ev(n.a,env));
+  } return NaN;
+}
+function varsOf(n,s=new Set()){ if(n.o==="v") s.add(n.v); if(n.a) varsOf(n.a,s); if(n.b) varsOf(n.b,s); return s; }
+function sameTerm(x,y){
+  const vs=[...new Set([...varsOf(x),...varsOf(y)])];
+  const pts=[1.37,-2.21,0.53,2.89,-0.77,1.91,-1.43];
+  for(let k=0;k<6;k++){
+    const env={}; vs.forEach((v,idx)=>{ env[v]=pts[(k+idx*3)%pts.length]+0.11*idx; });
+    const a=ev(x,env), b=ev(y,env);
+    if(!isFinite(a)||!isFinite(b)) return false;
+    if(Math.abs(a-b)>1e-8*Math.max(1,Math.abs(a),Math.abs(b))) return false;
+  }
+  return true;
+}
+function summands(n,out=[]){
+  if(n.o==="+"){ summands(n.a,out); summands(n.b,out); }
+  else if(n.o==="-"){ summands(n.a,out); out.push({o:"neg",a:n.b}); }
+  else out.push(n);
+  return out;
+}
+function hasSumInside(n,inside=false){
+  if(!n) return false;
+  if((n.o==="+"||n.o==="-")&&inside) return true;
+  const ins=inside||["*","/","^","neg","sqrt"].includes(n.o);
+  return hasSumInside(n.a,ins)||hasSumInside(n.b,ins);
+}
+function monoOk(n){
+  const nums=[0,0], vs={}; let ok=true;
+  (function f(m,den){
+    if(m.o==="neg") return f(m.a,den);
+    if(m.o==="*"){ f(m.a,den); f(m.b,den); return; }
+    if(m.o==="/"){ f(m.a,den); f(m.b,!den); return; }
+    if(m.o==="n"){ nums[den?1:0]++; return; }
+    if(m.o==="v"){ const k=m.v+(den?"/":""); vs[k]=(vs[k]||0)+1; return; }
+    if(m.o==="^"&&m.a.o==="v"&&m.b.o==="n"){ const k=m.a.v+(den?"/":""); vs[k]=(vs[k]||0)+1; return; }
+    ok=false;
+  })(n,false);
+  return ok && nums[0]<=1 && nums[1]<=1 && Object.values(vs).every(c=>c===1);
+}
+function termCheck(raw,p){
+  let s; try{ s=parseTerm(raw); }catch(_){ return "err"; }
+  const e=parseTerm(p.ans);
+  if(!sameTerm(s,e)) return "no";
+  if(p.mode==="expand"){
+    const sm=summands(s);
+    if(hasSumInside(s) || !sm.every(monoOk) || sm.length!==summands(e).length) return "form";
+  }
+  if(p.mode==="factor"){
+    let r=s; while(r.o==="neg") r=r.a;
+    if(!(r.o==="*"||r.o==="^") || !hasSumInside(r)) return "form";
+  }
+  return "ok";
+}
+
+/* ---------- Zusatztasten unter dem aktiven Feld ---------- */
+const strip=document.createElement("div");
+strip.className="keystrip"; strip.hidden=true; strip.setAttribute("aria-label","Zusatztasten");
+let activeInput=null;
+const KEYS={term:["²","^","(",")","+","−","·","/"], num:["−",",","/"], text:[]};
+function fillStrip(kind){
+  strip.innerHTML=(KEYS[kind]||[]).map(k=>`<button type="button" data-ins="${k}">${k}</button>`).join("");
+  strip.hidden=!(KEYS[kind]||[]).length;
+}
+function parkStrip(){ strip.hidden=true; document.body.appendChild(strip); activeInput=null; }
+document.addEventListener("focusin",e=>{
+  const inp=e.target;
+  if(inp.matches && inp.matches(".task input[type=text]")){
+    activeInput=inp; fillStrip(inp.dataset.kind);
+    inp.closest(".field").after(strip);
+  }
+});
+function insertAt(inp,txt){
+  const s=inp.selectionStart??inp.value.length, e2=inp.selectionEnd??inp.value.length;
+  inp.setRangeText(txt,s,e2,"end");
+  inp.dispatchEvent(new Event("input",{bubbles:true}));
+}
+strip.addEventListener("pointerdown",e=>{ if(e.target.closest("button")) e.preventDefault(); });
+strip.addEventListener("mousedown",e=>{ if(e.target.closest("button")) e.preventDefault(); });
+strip.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b||!activeInput) return;
+  insertAt(activeInput,b.dataset.ins); activeInput.focus();
+});
+
+/* ---------- Werkzeugkasten und Taschenrechner ---------- */
+function openSheet(id){
+  document.querySelectorAll(".sheet").forEach(s=>{ s.hidden = s.id!==id ? true : !s.hidden; });
+  if(id==="calcSheet" && !document.getElementById(id).hidden){ /* Tastatur nicht automatisch öffnen */ }
+}
+document.getElementById("toolSheetBody").innerHTML=(document.querySelector(".tools .inner")||{innerHTML:""}).innerHTML;
+document.getElementById("fabTools").addEventListener("click",()=>openSheet("toolSheet"));
+document.getElementById("fabCalc").addEventListener("click",()=>openSheet("calcSheet"));
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",()=>{ document.getElementById(b.dataset.close).hidden=true; }));
+
+const calcIn=document.getElementById("calcIn"), calcRes=document.getElementById("calcRes");
+function fmt(x){
+  if(!isFinite(x)) return null;
+  let s=String(Number(x.toPrecision(12)));
+  if(/e/.test(s)) s=x.toPrecision(8);
+  return s.replace(".",",");
+}
+function calcEval(){
+  const raw=calcIn.value.trim(); if(!raw) return;
+  let v; try{ const n=parseTerm(raw); if(varsOf(n).size) throw 0; v=ev(n,{}); }catch(_){ v=NaN; }
+  const r=fmt(v);
+  if(r===null){ calcRes.textContent="Diese Rechnung kann ich nicht lesen."; return; }
+  calcRes.textContent=raw+" ="; calcIn.value=r;
+}
+document.getElementById("ckeys").addEventListener("pointerdown",e=>{ if(e.target.closest("button")) e.preventDefault(); });
+document.getElementById("ckeys").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  const k=b.dataset.k;
+  if(k==="C"){ calcIn.value=""; calcRes.textContent=""; return; }
+  if(k==="DEL"){ calcIn.value=calcIn.value.slice(0,-1); return; }
+  if(k==="="){ calcEval(); return; }
+  calcIn.value+=k;
+});
+
+render(); updateScore();
+</script>
+</body>
+</html>
